@@ -20,7 +20,8 @@ public class CheckedSender {
                 new CheckedOutputStream(out, checksum));
     }
 
-    public void sendMessage(Object msg) throws IOException {
+    // Make the method synchronized to allow only a single thread to enter the method at any one time
+    public synchronized void sendMessage(Object msg) throws IOException {
         out.writeObject(MARKER);
         checksum.reset();
         out.writeObject(msg);

@@ -46,9 +46,9 @@ public class CachedFactorizer extends HttpServlet {
         BigInteger i = extractFromRequest(req);
         BigInteger[] factors = null;
         synchronized (this) {
-            ++hits ; // synchronized and Read-write-modify performed as a single atomic step
+            ++hits ; // synchronized and Read-write-modify compound action performed as a single atomic step
             if (i.equals(lastNumber)) {
-                ++ cachedHits; // synchronized and Read-write-modify performed as a single atomic step
+                ++ cachedHits; // synchronized and Read-write-modify compound action  performed as a single atomic step
                 factors = lastFactors;
             }
         }

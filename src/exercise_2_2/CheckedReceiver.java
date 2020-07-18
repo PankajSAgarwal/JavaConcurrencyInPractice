@@ -18,7 +18,8 @@ public class CheckedReceiver {
                 new CheckedInputStream(in, checksum));
     }
 
-    public Object receiveMessage() throws IOException, ClassNotFoundException {
+    // Make the method synchronized to allow only a single thread to enter the method at any one time
+    public synchronized Object receiveMessage() throws IOException, ClassNotFoundException {
         in.readObject(); // marker object
         checksum.reset();
         Object msg = in.readObject();
